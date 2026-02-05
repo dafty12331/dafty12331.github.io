@@ -5,218 +5,323 @@
   <title>DAFTY | VALORANT Streamer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --valorant-red: #ff4655;
-      --bg-dark: #0b0f14;
-      --card-bg: rgba(255,255,255,0.05);
-    }
+:root {
+  --valorant-red: #ff4655;
+  --bg-main: #0f1923;
+  --bg-sub: #111823;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Noto Sans JP', sans-serif;
-      background: radial-gradient(circle at top, #141b23, var(--bg-dark));
-      color: #fff;
-    }
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-    }
+body {
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #fff;
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 0.15em;
-      margin-bottom: 20px;
-    }
+  /* VALORANT風 斜め2トーン背景 */
+  background:
+    linear-gradient(
+      135deg,
+      var(--bg-main) 0%,
+      var(--bg-main) 45%,
+      var(--bg-sub) 45%,
+      var(--bg-sub) 100%
+    );
+}
 
-    header p {
-      line-height: 1.8;
-      opacity: 0.9;
-      max-width: 600px;
-    }
+/* ===== Header ===== */
+header {
+  position: relative;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-    .socials {
-      margin-top: 40px;
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+/* 赤いオーバーレイ */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,70,85,0.18),
+    transparent 60%
+  );
+  z-index: -1;
+}
 
-    .social-btn {
-      padding: 14px 28px;
-      border-radius: 999px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+}
 
-    .social-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    }
+header p {
+  max-width: 600px;
+  line-height: 1.8;
+  opacity: 0.9;
+}
 
-    .twitch { background: #9146FF; }
-    .youtube { background: #FF0000; }
-    .discord { background: #5865F2; }
+/* ===== Social Buttons ===== */
+/* ===== SNS BUTTONS (X風) ===== */
 
-    /* Latest Videos */
-    .latest {
-      max-width: 1100px;
-      margin: 80px auto;
-      padding: 0 20px;
-    }
+.socials {
+  margin-top: 40px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    .latest h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: .1em;
-      margin-bottom: 24px;
-      border-left: 4px solid var(--valorant-red);
-      padding-left: 12px;
-    }
+.social-btn {
+  position: relative;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: #fff;
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+  background: rgba(0,0,0,0.6);
+  border: 1.5px solid transparent;
 
-    @media (max-width: 900px) {
-      .video-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .2s ease;
+}
 
-    @media (max-width: 600px) {
-      .video-grid { grid-template-columns: 1fr; }
-    }
+.social-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.06);
+}
 
-    .video-card {
-      position: relative;
-      background: var(--card-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      text-decoration: none;
-      color: #fff;
-      box-shadow: 0 20px 40px rgba(0,0,0,.45);
-      transition: transform .3s ease;
-    }
+/* ===== サービス別カラー ===== */
 
-    .video-card:hover {
-      transform: translateY(-6px);
-    }
+/* Twitch */
+.social-btn.twitch {
+  border-color: #7a3cff;
+}
+.social-btn.twitch:hover {
+  box-shadow: 0 0 0 1px #9146FF, 0 0 18px rgba(145,70,255,.35);
+}
 
-    .video-card img {
-      width: 100%;
-      display: block;
-    }
+/* YouTube */
+.social-btn.youtube {
+  border-color: #cc0000;
+}
+.social-btn.youtube:hover {
+  box-shadow: 0 0 0 1px #ff0000, 0 0 18px rgba(255,0,0,.35);
+}
 
-    .video-title {
-      padding: 10px 12px;
-      font-size: .9rem;
-      opacity: .9;
-    }
+/* Discord */
+.social-btn.discord {
+  border-color: #4752c4;
+}
+.social-btn.discord:hover {
+  box-shadow: 0 0 0 1px #5865F2, 0 0 18px rgba(88,101,242,.35);
+}
 
-    .badge-new {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: var(--valorant-red);
-      font-size: .7rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      letter-spacing: .05em;
-    }
+/* X */
+.social-btn.x {
+  border-color: #2b2b2b;
+}
+.social-btn.x:hover {
+  box-shadow: 0 0 0 1px #ffffff, 0 0 18px rgba(255,255,255,.35);
+}
 
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      opacity: .5;
-      font-size: .8rem;
-    }
+
+.twitch { background: #9146FF; }
+.youtube { background: #FF0000; }
+.discord { background: #5865F2; }
+
+/* ===== Latest Videos ===== */
+.latest {
+  margin-top: 120px;
+  padding: 0 40px 80px;
+}
+
+.latest h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+
+.latest .bar {
+  width: 4px;
+  height: 24px;
+  background: var(--valorant-red);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* 動画カード */
+.video-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+}
+
+/* サムネ */
+.video-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* 再生ボタン風オーバーレイ */
+.video-card::after {
+  content: "▶";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 64px;
+  color: #fff;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  transition: .25s;
+  pointer-events: none;
+}
+
+.video-card:hover::after {
+  opacity: 1;
+}
+
+/* NEWバッジ */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--valorant-red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 6px;
+  z-index: 5;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  opacity: .5;
+  font-size: .8rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>DAFTY</h1>
-  <p>
-    VALORANTメインでゲーム配信してます。<br>
-    初見さんも気軽にどうぞ！<br><br>
+  <header>
+    <h1>DAFTY</h1>
+    <p>
+      VALORANTメインでゲーム配信してます。<br>
+      初見さんも気軽にどうぞ！<br><br>
 
-    <strong>FPS歴</strong><br>
-    OW：グラマス<br>
-    Apex：プレデター<br>
-    CS2：10000↑<br>
-    今はVALORANTに全力🔥
-  </p>
+      <strong>FPS歴</strong><br>
+      OW：グラマス<br>
+      Apex：プレデター<br>
+      CS2：10000↑<br>
+      今はVALORANTに全力🔥
+    </p>
 
-  <div class="socials">
-    <a class="social-btn twitch" href="https://twitch.tv/daftydesuyo" target="_blank">Twitch</a>
-    <a class="social-btn youtube" href="https://youtube.com/@daftyVL" target="_blank">YouTube</a>
-    <a class="social-btn discord" href="https://discord.gg/MeSY5TbntD" target="_blank">Discord</a>
-  </div>
-</header>
+    <div class="socials">
+      <a class="social-btn x" href="https://x.com/daftydesuyo" target="_blank">X</a>
+      <a class="social-btn twitch" href="https://twitch.tv/daftydesuyo" target="_blank">Twitch</a>
+      <a class="social-btn youtube" href="https://youtube.com/@daftyVL" target="_blank">YouTube</a>
+      <a class="social-btn discord" href="https://discord.gg/MeSY5TbntD" target="_blank">Discord</a>
+    </div>
+  </header>
 
 <section class="latest">
-  <h2>LATEST VIDEOS</h2>
-  <div class="video-grid" id="videos"></div>
+  <h2>
+    <span class="bar"></span>
+    LATEST VIDEOS
+  </h2>
+
+  <div class="video-grid">
+
+    <!-- VIDEO 1 -->
+    <a
+      class="video-card"
+      href="https://youtu.be/Cd9eAwCAKjg"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="badge">NEW</span>
+      <img
+        src="https://img.youtube.com/vi/Cd9eAwCAKjg/hqdefault.jpg"
+        alt="動画1"
+      />
+    </a>
+
+    <!-- VIDEO 2 -->
+    <a
+      class="video-card"
+      href="https://youtu.be/LoY01bkxgkI"
+      target="_blank"
+      rel="noopener"
+    >
+      <img
+        src="https://img.youtube.com/vi/LoY01bkxgkI/hqdefault.jpg"
+        alt="動画2"
+      />
+    </a>
+
+    <!-- VIDEO 3 -->
+    <a
+      class="video-card"
+      href="https://youtu.be/QtQYL2ycwUo"
+      target="_blank"
+      rel="noopener"
+    >
+      <img
+        src="https://img.youtube.com/vi/QtQYL2ycwUo/hqdefault.jpg"
+        alt="動画3"
+      />
+    </a>
+
+  </div>
 </section>
 
-<footer>
-  © 2026 daftyVL
-</footer>
 
-<script>
-  const API_KEY = 'AIzaSyD1cplG5mQAdBXZ7dGzRuV2d6K5KJSf50U';
-  const CHANNEL_ID = 'UCav6V4Hwk9bEnE9X0gabVCg';
-  const MAX_RESULTS = 6;
 
-  fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`)
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById('videos');
-
-      data.items.forEach((item, index) => {
-        if (!item.id.videoId) return;
-
-        const card = document.createElement('a');
-        card.className = 'video-card';
-        card.href = `https://www.youtube.com/watch?v=${item.id.videoId}`;
-        card.target = '_blank';
-
-        if (index === 0) {
-          const badge = document.createElement('div');
-          badge.className = 'badge-new';
-          badge.textContent = 'NEW';
-          card.appendChild(badge);
-        }
-
-        const img = document.createElement('img');
-        img.src = item.snippet.thumbnails.high.url;
-
-        const title = document.createElement('div');
-        title.className = 'video-title';
-        title.textContent = item.snippet.title;
-
-        card.appendChild(img);
-        card.appendChild(title);
-        container.appendChild(card);
-      });
-    });
-</script>
+  <footer>
+    © 2026 DAFTY
+  </footer>
 
 </body>
 </html>
